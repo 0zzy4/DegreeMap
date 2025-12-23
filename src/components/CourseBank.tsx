@@ -38,7 +38,7 @@ export default function CourseBank() {
               <td className="text-gray-800 py-3 px-4">{course.credits}</td>
               <td className="text-gray-800 py-3 px-4">Edit & Delete Button Placeholders</td>
             </tr>
-          ))};
+          ))}
         </tbody>
       </table>
 

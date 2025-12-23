@@ -74,7 +74,6 @@ export default function AddCourseModal({ isOpen, onClose, onSave}: AddCourseModa
             <h2 className="text-gray-800 font-semibold mb-2">Credit Hours</h2>
             <input
               type="number"
-              defaultValue={3}
               value={credits}
               onChange={(e) => setCredits(e.target.value)}
               className="text-gray-600 border border-gray-800 rounded px-4 py-2" />
