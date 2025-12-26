@@ -7,15 +7,14 @@ interface AddCourseModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave?: (course: Course) => void;
+  location: string;
 }
 
-export default function AddCourseModal({ isOpen, onClose, onSave}: AddCourseModalProps) {
-  const id = crypto.randomUUID();
+export default function AddCourseModal({ isOpen, onClose, onSave, location}: AddCourseModalProps) {
   const [courseCode, setCourseCode] = useState<string>("");
   const [courseName, setCourseName] = useState<string>("");
   const [credits, setCredits] = useState<string>("3");
   const [type, setType] = useState<string>("");
-  const location = "";
 
   if (!isOpen) return null;
 
@@ -23,7 +22,7 @@ export default function AddCourseModal({ isOpen, onClose, onSave}: AddCourseModa
     e.preventDefault();
 
     const newCourse: Course = {
-      id,
+      id: crypto.randomUUID(),
       courseCode,
       courseName,
       credits: Number(credits),

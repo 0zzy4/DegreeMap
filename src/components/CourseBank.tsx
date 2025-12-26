@@ -5,14 +5,15 @@ import AddCourseButton from "./AddCourseButton";
 import AddCourseModal from "./AddCourseModal";
 import { Course } from "@/types/Course";
 
-export default function CourseBank() {
+interface CourseBankProps {
+  courses: Course[];
+  onAddCourse: (course: Course) => void;
+}
+
+export default function CourseBank({ courses, onAddCourse }: CourseBankProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [courses, setCourses] = useState<Course[]>([]);
-
-  const handleAddCourse = (newCourse: Course) => {
-    setCourses([...courses, newCourse]);
-  };
+  // const bankCourses = courses.filter(c => c.location === 'bank');
 
   return (
     <div className="bg-white rounded-lg shadow p-6 mb-8"> {/* Course Bank Container */}
@@ -45,7 +46,8 @@ export default function CourseBank() {
       <AddCourseModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSave={handleAddCourse}
+        onSave={onAddCourse}
+        location="bank"
       />
 
     </div>
