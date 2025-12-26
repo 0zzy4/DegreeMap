@@ -18,7 +18,7 @@ export default function CourseBank() {
     <div className="bg-white rounded-lg shadow p-6 mb-8"> {/* Course Bank Container */}
       <div className="flex justify-between mb-4"> {/* Div for Course Bank Header & Button */}
         <h2 className="text-gray-800 text-xl font-semibold mb-4">Course Bank</h2>
-        <AddCourseButton onClick={() => setIsModalOpen(true)} text="+ Add Course" />
+        <AddCourseButton onClick={() => setIsModalOpen(true)} text="+ Add Course" size="md" />
       </div>
 
       <table className="w-full table-fixed">

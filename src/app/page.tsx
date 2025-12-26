@@ -1,5 +1,8 @@
+"use client";
+import useState from "react";
 import CourseBank from "@/components/CourseBank";
 import SemesterGrid from "@/components/SemesterGrid";
+import { Course } from "@/types/Course";
 
 export default function Home() {
   return (
