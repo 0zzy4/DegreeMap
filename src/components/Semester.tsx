@@ -13,10 +13,10 @@ interface SemesterProps {
 }
 
 export default function Semester({semester, courses, onAddCourse}: SemesterProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <div className="text-left px-4">
+    <div className={`text-left px-4 ${semester === "Spring" ? "border-l border-r border-gray-300" : ""}`}>
       <div className="flex flex-row justify-between pt-4">
         <h2 className="text-gray-800">{semester}</h2>
       <AddCourseButton  onClick={() => setIsModalOpen(true)} text="+" size="sm" />
