@@ -12,8 +12,7 @@ interface CourseBankProps {
 
 export default function CourseBank({ courses, onAddCourse }: CourseBankProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const bankCourses = courses.filter(c => c.location === 'bank');
+  const bankCourses = courses.filter(c => c.location === 'Bank');
 
   return (
     <div className="bg-white rounded-lg shadow p-6 mb-8"> {/* Course Bank Container */}
@@ -32,7 +31,7 @@ export default function CourseBank({ courses, onAddCourse }: CourseBankProps) {
           </tr>
         </thead>
         <tbody>
-          {courses.map((course) => (
+          {bankCourses.map((course) => (
             <tr key={course.id} className="border-b border-gray-200 hover:bg-gray-50 text-center">
               <td className="text-gray-800 py-3 px-4">{course.courseCode}</td>
               <td className="text-gray-800 py-3 px-4">{course.courseName}</td>
@@ -47,7 +46,7 @@ export default function CourseBank({ courses, onAddCourse }: CourseBankProps) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={onAddCourse}
-        location="bank"
+        location="Bank"
       />
 
     </div>

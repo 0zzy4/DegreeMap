@@ -7,13 +7,16 @@ import { Course } from "@/types/Course";
 import CourseTile from "./CourseTile";
 
 interface SemesterProps {
+  year: string
   semester: string;
   courses: Course[];
   onAddCourse: (course: Course) => void;
 }
 
-export default function Semester({semester, courses, onAddCourse}: SemesterProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+export default function Semester({year,semester, courses, onAddCourse}: SemesterProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const semesterCourses = courses.filter((c) => c.location === `${year} - ${semester}`);
 
   return (
     <div className={`text-left px-4 ${semester === "Spring" ? "border-l border-r border-gray-300" : ""}`}>
@@ -22,9 +25,9 @@ export default function Semester({semester, courses, onAddCourse}: SemesterProps
       <AddCourseButton  onClick={() => setIsModalOpen(true)} text="+" size="sm" />
     </div>
     <p className="text-sm text-gray-300 py-2">
-      {courses.reduce((sum, c) => sum + c.credits, 0)} credits
+      {semesterCourses.reduce((sum, c) => sum + c.credits, 0)} credits
     </p>
-    {courses.map((course) => (
+    {semesterCourses.map((course) => (
       <CourseTile course={course} key={course.id} />
     ))}
 
@@ -32,7 +35,7 @@ export default function Semester({semester, courses, onAddCourse}: SemesterProps
       isOpen={isModalOpen}
       onClose={() => setIsModalOpen(false)}
       onSave={onAddCourse}
-      location={semester}
+      location={`${year} - ${semester}`}
     />
   </div>
   );
