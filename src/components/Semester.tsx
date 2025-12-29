@@ -24,7 +24,7 @@ export default function Semester({year,semester, courses, onAddCourse}: Semester
         <h2 className="text-gray-800">{semester}</h2>
       <AddCourseButton  onClick={() => setIsModalOpen(true)} text="+" size="sm" />
     </div>
-    <p className="text-sm text-gray-300 py-2">
+    <p className="text-sm text-gray-300 pt-2">
       {semesterCourses.reduce((sum, c) => sum + c.credits, 0)} credits
     </p>
 
