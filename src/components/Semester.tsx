@@ -27,9 +27,16 @@ export default function Semester({year,semester, courses, onAddCourse}: Semester
     <p className="text-sm text-gray-300 py-2">
       {semesterCourses.reduce((sum, c) => sum + c.credits, 0)} credits
     </p>
-    {semesterCourses.map((course) => (
+
+    {semesterCourses.length > 0 && semesterCourses.map((course) => (
       <CourseTile course={course} key={course.id} />
     ))}
+
+    {semesterCourses.length === 0 && (
+      <div className="rounded-lg border border-dashed border-gray-400 h-16 my-4 flex items-center justify-center">
+        <p className="text-sm text-gray-400">No courses added yet.</p>
+      </div>
+    )}
 
     <AddCourseModal
       isOpen={isModalOpen}

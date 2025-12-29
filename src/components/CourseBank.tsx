@@ -31,7 +31,7 @@ export default function CourseBank({ courses, onAddCourse }: CourseBankProps) {
           </tr>
         </thead>
         <tbody>
-          {bankCourses.map((course) => (
+          {bankCourses.length > 0 && bankCourses.map((course) => (
             <tr key={course.id} className="border-b border-gray-200 hover:bg-gray-50 text-center">
               <td className="text-gray-800 py-3 px-4">{course.courseCode}</td>
               <td className="text-gray-800 py-3 px-4">{course.courseName}</td>
@@ -41,6 +41,12 @@ export default function CourseBank({ courses, onAddCourse }: CourseBankProps) {
           ))}
         </tbody>
       </table>
+
+      {bankCourses.length === 0 && (
+        <div className="rounded-lg border border-dashed border-gray-400 h-16 my-4 flex items-center justify-center">
+          <p className="text-sm text-gray-400">No courses in the bank yet.</p>
+        </div>
+      )}
 
       <AddCourseModal
         isOpen={isModalOpen}
