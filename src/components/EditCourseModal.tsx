@@ -1,40 +1,47 @@
 "use client";
 
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { Course } from "@/types/Course";
 
-interface AddCourseModalProps {
+interface EditCourseModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave?: (course: Course) => void;
-  location: string;
+  course: Course;
 }
 
-export default function AddCourseModal({ isOpen, onClose, onSave, location}: AddCourseModalProps) {
-  const [courseCode, setCourseCode] = useState<string>("");
-  const [courseName, setCourseName] = useState<string>("");
-  const [credits, setCredits] = useState<string>("3");
-  const [type, setType] = useState<string>("");
+export default function EditCourseModal({ isOpen, onClose, onSave, course}: EditCourseModalProps) {
+  const [courseCode, setCourseCode] = useState<string>(course.courseCode);
+  const [courseName, setCourseName] = useState<string>(course.courseName);
+  const [credits, setCredits] = useState<string>(course.credits.toString());
+  const [type, setType] = useState<string>(course.type);
+  const [location, setLocation] = useState<string>(course.location);
+
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     setCourseCode(course.courseCode);
+  //     setCourseName(course.courseName);
+  //     setCredits(course.credits.toString());
+  //     setType(course.type);
+  //     setLocation(course.location);
+  //   }
+  // }, [isOpen, course]);
 
   if (!isOpen) return null;
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newCourse: Course = {
-      id: crypto.randomUUID(),
+    const updatedCourse: Course = {
+      id: course.id,
       courseCode,
       courseName,
       credits: Number(credits),
       type,
       location,
-    };
+    }
 
-    onSave && onSave(newCourse); // passes newCourse to parent function (aka handleAddCourse)
-    setCourseCode("");
-    setCourseName("");
-    setCredits("3");
-    setType("");
+    onSave && onSave(updatedCourse); // passes updatedCourse to parent function
     onClose();
   }
 
@@ -44,7 +51,7 @@ export default function AddCourseModal({ isOpen, onClose, onSave, location}: Add
       <div className="bg-white rounded-lg max-w-md w-full p-6"> {/* Modal Container */}
 
         <div className="flex justify-between">
-          <h2 className="text-gray-800 text-xl font-semibold mb-4">Add Course</h2>
+          <h2 className="text-gray-800 text-xl font-semibold mb-4">Edit Course</h2>
           <button className="border text-gray-800 rounded px-4 py-2 hover:bg-gray-200" onClick={onClose}>X</button>
         </div>
 
@@ -87,9 +94,44 @@ export default function AddCourseModal({ isOpen, onClose, onSave, location}: Add
               className="text-gray-600 border border-gray-800 rounded px-4 py-2" />
           </div>
 
+          <div className="flex flex-col mb-4">
+            <h2 className="text-gray-800 font-semibold mb-2">Location</h2>
+            <select
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="text-gray-600 border border-gray-800 rounded px-4 py-2"
+            >
+              <option value="bank">Course Bank</option>
+
+              <optgroup label="Year 1">
+                <option value="Year 1 - Fall">Fall</option>
+                <option value="Year 1 - Spring">Spring</option>
+                <option value="Year 1 - Summer">Summer</option>
+              </optgroup>
+
+              <optgroup label="Year 2">
+                <option value="Year 2 - Fall">Fall</option>
+                <option value="Year 2 - Spring">Spring</option>
+                <option value="Year 2 - Summer">Summer</option>
+              </optgroup>
+
+              <optgroup label="Year 3">
+                <option value="Year 3 - Fall">Fall</option>
+                <option value="Year 3 - Spring">Spring</option>
+                <option value="Year 3 - Summer">Summer</option>
+              </optgroup>
+
+              <optgroup label="Year 4">
+                <option value="Year 4 - Fall">Fall</option>
+                <option value="Year 4 - Spring">Spring</option>
+                <option value="Year 4 - Summer">Summer</option>
+              </optgroup>
+            </select>
+          </div>
+
           <div className="modal-actions flex justify-between">
             <button className="border text-gray-800 rounded px-4 py-2 hover:bg-gray-200" type="button" onClick={onClose}>Cancel</button>
-            <button className="border bg-violet-400 text-white rounded px-4 py-2 hover:bg-violet-500" type="submit">Add</button>
+            <button className="border bg-violet-400 text-white rounded px-4 py-2 hover:bg-violet-500" type="submit">Save</button>
           </div>
         </form>
 

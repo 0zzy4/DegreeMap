@@ -8,9 +8,10 @@ import { Course } from "@/types/Course";
 interface CourseBankProps {
   courses: Course[];
   onAddCourse: (course: Course) => void;
+  onEditCourse: (course: Course) => void;
 }
 
-export default function CourseBank({ courses, onAddCourse }: CourseBankProps) {
+export default function CourseBank({ courses, onAddCourse, onEditCourse }: CourseBankProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const bankCourses = courses.filter(c => c.location === 'Bank');
 
