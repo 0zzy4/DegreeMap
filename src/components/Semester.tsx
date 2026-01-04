@@ -36,7 +36,7 @@ export default function Semester({year, semester, courses, onAddCourse, onEditCo
 
     {semesterCourses.length === 0 && (
       <div className="rounded-lg border border-dashed border-gray-400 h-16 my-4 flex items-center justify-center">
-        <p className="text-sm text-gray-400">No courses added yet.</p>
+        <p className="text-center text-sm text-gray-400">No courses added</p>
       </div>
     )}
 

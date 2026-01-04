@@ -18,7 +18,10 @@ interface CourseBankProps {
 
 export default function CourseBank({ courses, onAddCourse, onEditCourse, onDeleteCourse }: CourseBankProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  // one state - course = being edited; null = closed
+  const [editingCourse, setEditingCourse] = useState<Course | null>(null);
+
   const bankCourses = courses.filter(c => c.location === 'Bank');
 
   return (
@@ -45,16 +48,9 @@ export default function CourseBank({ courses, onAddCourse, onEditCourse, onDelet
               <td className="text-gray-800 py-3 px-4">{course.credits}</td>
               <td>
                 <div className="flex items-center justify-center gap-2">
-                  <EditCourseButton onClick={() => setIsEditModalOpen(true)} />
+                  <EditCourseButton onClick={() => setEditingCourse(course)} />
                   <DeleteCourseButton onClick={() => onDeleteCourse(course.id)} />
                 </div>
-                <EditCourseModal
-                  key={course?.id} // question mark for if course is null/undefined
-                  isOpen={isEditModalOpen}
-                  onClose={() => setIsEditModalOpen(false)}
-                  onSave={onEditCourse}
-                  course={course}
-                />
               </td>
             </tr>
           ))}
@@ -63,7 +59,7 @@ export default function CourseBank({ courses, onAddCourse, onEditCourse, onDelet
 
       {bankCourses.length === 0 && (
         <div className="rounded-lg border border-dashed border-gray-400 h-16 my-4 flex items-center justify-center">
-          <p className="text-sm text-gray-400">No courses in the bank yet.</p>
+          <p className="text-center text-sm text-gray-400">No courses in the bank yet</p>
         </div>
       )}
 
@@ -73,6 +69,16 @@ export default function CourseBank({ courses, onAddCourse, onEditCourse, onDelet
         onSave={onAddCourse}
         location="Bank"
       />
+
+      {editingCourse &&
+        <EditCourseModal
+          key={editingCourse.id}
+          isOpen={true} // always true when rendered (because of {editingCourse && ...})
+          onClose={() => setEditingCourse(null)}
+          onSave={onEditCourse} // onSave in EditCourseModal also calls onClose(), so don't need to call it here
+          course={editingCourse}
+        />
+      }
 
     </div>
 
