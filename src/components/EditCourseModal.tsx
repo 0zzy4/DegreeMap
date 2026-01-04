@@ -11,21 +11,21 @@ interface EditCourseModalProps {
 }
 
 export default function EditCourseModal({ isOpen, onClose, onSave, course}: EditCourseModalProps) {
-  const [courseCode, setCourseCode] = useState<string>(course.courseCode);
-  const [courseName, setCourseName] = useState<string>(course.courseName);
-  const [credits, setCredits] = useState<string>(course.credits.toString());
-  const [type, setType] = useState<string>(course.type);
-  const [location, setLocation] = useState<string>(course.location);
+  const [draftCourseCode, setDraftCourseCode] = useState<string>(course.courseCode);
+  const [draftCourseName, setDraftCourseName] = useState<string>(course.courseName);
+  const [draftCredits, setDraftCredits] = useState<string>(course.credits.toString());
+  const [draftType, setDraftType] = useState<string>(course.type);
+  const [draftLocation, setDraftLocation] = useState<string>(course.location);
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     setCourseCode(course.courseCode);
-  //     setCourseName(course.courseName);
-  //     setCredits(course.credits.toString());
-  //     setType(course.type);
-  //     setLocation(course.location);
-  //   }
-  // }, [isOpen, course]);
+  useEffect(() => {
+    if (isOpen) {
+      setDraftCourseCode(course.courseCode);
+      setDraftCourseName(course.courseName);
+      setDraftCredits(course.credits.toString());
+      setDraftType(course.type);
+      setDraftLocation(course.location);
+    }
+  }, [isOpen, course]);
 
   if (!isOpen) return null;
 
@@ -34,11 +34,11 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
 
     const updatedCourse: Course = {
       id: course.id,
-      courseCode,
-      courseName,
-      credits: Number(credits),
-      type,
-      location,
+      courseCode: draftCourseCode,
+      courseName: draftCourseName,
+      credits: Number(draftCredits),
+      type: draftType,
+      location: draftLocation,
     }
 
     onSave && onSave(updatedCourse); // passes updatedCourse to parent function
@@ -60,8 +60,8 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
             <h2 className="text-gray-800 font-semibold mb-2">Course Code</h2>
             <input
               type="text"
-              value={courseCode}
-              onChange={(e) => setCourseCode(e.target.value)}
+              value={draftCourseCode}
+              onChange={(e) => setDraftCourseCode(e.target.value)}
               placeholder="e.g. CS 101"
               className="text-gray-600 border border-gray-800 rounded px-4 py-2 placeholder:text-gray-300" />
           </div>
@@ -70,8 +70,8 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
             <h2 className="text-gray-800 font-semibold mb-2">Course Name</h2>
             <input
               type="text"
-              value={courseName}
-              onChange={(e) => setCourseName(e.target.value)}
+              value={draftCourseName}
+              onChange={(e) => setDraftCourseName(e.target.value)}
               placeholder="e.g. Intro to Programming"
               className="text-gray-600 border border-gray-800 rounded px-4 py-2 placeholder:text-gray-300" />
           </div>
@@ -80,8 +80,8 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
             <h2 className="text-gray-800 font-semibold mb-2">Credit Hours</h2>
             <input
               type="number"
-              value={credits}
-              onChange={(e) => setCredits(e.target.value)}
+              value={draftCredits}
+              onChange={(e) => setDraftCredits(e.target.value)}
               className="text-gray-600 border border-gray-800 rounded px-4 py-2" />
           </div>
 
@@ -89,16 +89,16 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
             <h2 className="text-gray-800 font-semibold mb-2">Course Type</h2>
             <input
               type="text"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
+              value={draftType}
+              onChange={(e) => setDraftType(e.target.value)}
               className="text-gray-600 border border-gray-800 rounded px-4 py-2" />
           </div>
 
           <div className="flex flex-col mb-4">
             <h2 className="text-gray-800 font-semibold mb-2">Location</h2>
             <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              value={draftLocation}
+              onChange={(e) => setDraftLocation(e.target.value)}
               className="text-gray-600 border border-gray-800 rounded px-4 py-2"
             >
               <option value="bank">Course Bank</option>
