@@ -12,9 +12,10 @@ interface SemesterProps {
   courses: Course[];
   onAddCourse: (course: Course) => void;
   onEditCourse: (course: Course) => void;
+  onDeleteCourse: (courseId: string) => void;
 }
 
-export default function Semester({year, semester, courses, onAddCourse, onEditCourse}: SemesterProps) {
+export default function Semester({year, semester, courses, onAddCourse, onEditCourse, onDeleteCourse}: SemesterProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const semesterCourses = courses.filter((c) => c.location === `${year} - ${semester}`);
@@ -30,7 +31,7 @@ export default function Semester({year, semester, courses, onAddCourse, onEditCo
     </p>
 
     {semesterCourses.length > 0 && semesterCourses.map((course) => (
-      <CourseTile course={course} key={course.id} onEditCourse={onEditCourse} />
+      <CourseTile course={course} key={course.id} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} />
     ))}
 
     {semesterCourses.length === 0 && (

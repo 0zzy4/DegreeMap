@@ -6,9 +6,10 @@ interface YearProps {
   courses: Course[];
   onAddCourse: (course: Course) => void;
   onEditCourse: (course: Course) => void;
+  onDeleteCourse: (courseId: string) => void;
 }
 
-export default function Year({ year, courses, onAddCourse, onEditCourse }: YearProps) {
+export default function Year({ year, courses, onAddCourse, onEditCourse, onDeleteCourse }: YearProps) {
   return (
     <div className="border border-gray-300 rounded-lg mt-4"> {/* Year Container */}
 
@@ -16,9 +17,9 @@ export default function Year({ year, courses, onAddCourse, onEditCourse }: YearP
         <h2 className="font-bold text-gray-800">{year}</h2>
       </div>
       <div className="grid grid-cols-3">
-        <Semester year={year} courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} semester="Fall" />
-        <Semester year={year} courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} semester="Spring" />
-        <Semester year={year} courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} semester="Summer" />
+        <Semester year={year} courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} semester="Fall" />
+        <Semester year={year} courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} semester="Spring" />
+        <Semester year={year} courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} semester="Summer" />
       </div>
 
     </div>

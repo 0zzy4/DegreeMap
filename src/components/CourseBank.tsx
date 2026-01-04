@@ -4,15 +4,21 @@ import { useState } from "react";
 import AddCourseButton from "./ui/AddCourseButton";
 import AddCourseModal from "./ui/AddCourseModal";
 import { Course } from "@/types/Course";
+import EditCourseButton from "./ui/EditCourseButton";
+import EditCourseModal from "./ui/EditCourseModal";
+import BackToBankButton from "./ui/BackToBankButton";
+import DeleteCourseButton from "./ui/DeleteCourseButton";
 
 interface CourseBankProps {
   courses: Course[];
   onAddCourse: (course: Course) => void;
   onEditCourse: (course: Course) => void;
+  onDeleteCourse: (courseId: string) => void;
 }
 
-export default function CourseBank({ courses, onAddCourse, onEditCourse }: CourseBankProps) {
+export default function CourseBank({ courses, onAddCourse, onEditCourse, onDeleteCourse }: CourseBankProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const bankCourses = courses.filter(c => c.location === 'Bank');
 
   return (
@@ -37,7 +43,19 @@ export default function CourseBank({ courses, onAddCourse, onEditCourse }: Cours
               <td className="text-gray-800 py-3 px-4">{course.courseCode}</td>
               <td className="text-gray-800 py-3 px-4">{course.courseName}</td>
               <td className="text-gray-800 py-3 px-4">{course.credits}</td>
-              <td className="text-gray-800 py-3 px-4">Edit & Delete Button Placeholders</td>
+              <td>
+                <div className="flex items-center justify-center gap-2">
+                  <EditCourseButton onClick={() => setIsEditModalOpen(true)} />
+                  <DeleteCourseButton onClick={() => onDeleteCourse(course.id)} />
+                </div>
+                <EditCourseModal
+                  key={course?.id} // question mark for if course is null/undefined
+                  isOpen={isEditModalOpen}
+                  onClose={() => setIsEditModalOpen(false)}
+                  onSave={onEditCourse}
+                  course={course}
+                />
+              </td>
             </tr>
           ))}
         </tbody>

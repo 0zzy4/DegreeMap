@@ -4,14 +4,14 @@ import { useState } from "react";
 import { Course } from "@/types/Course";
 import Year from "./Year";
 
-
 interface SemesterGridProps {
   courses: Course[];
   onAddCourse: (course: Course) => void;
   onEditCourse: (course: Course) => void;
+  onDeleteCourse: (courseId: string) => void;
 }
 
-export default function SemesterGrid({ courses, onAddCourse, onEditCourse }: SemesterGridProps) {
+export default function SemesterGrid({ courses, onAddCourse, onEditCourse, onDeleteCourse }: SemesterGridProps) {
 
   return (
     <div className="bg-white rounded-lg shadow p-6 mb-8"> {/* Semester Grid Container */}
@@ -20,10 +20,10 @@ export default function SemesterGrid({ courses, onAddCourse, onEditCourse }: Sem
       </div>
 
       <div className="flex flex-col">
-        <Year year="Year 1" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} />
-        <Year year="Year 2" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} />
-        <Year year="Year 3" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} />
-        <Year year="Year 4" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} />
+        <Year year="Year 1" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} />
+        <Year year="Year 2" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} />
+        <Year year="Year 3" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} />
+        <Year year="Year 4" courses={courses} onAddCourse={onAddCourse} onEditCourse={onEditCourse} onDeleteCourse={onDeleteCourse} />
       </div>
 
     </div>
