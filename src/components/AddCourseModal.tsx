@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, type FormEvent } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import { Course } from "@/types/Course";
 
 interface AddCourseModalProps {
@@ -22,7 +23,7 @@ export default function AddCourseModal({ isOpen, onClose, onSave, location}: Add
     e.preventDefault();
 
     const newCourse: Course = {
-      id: crypto.randomUUID(),
+      id: uuidv4(),
       courseCode,
       courseName,
       credits: Number(credits),

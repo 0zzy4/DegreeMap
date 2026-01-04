@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Course} from "../types/Course";
 import EditCourseModal from "./EditCourseModal";
