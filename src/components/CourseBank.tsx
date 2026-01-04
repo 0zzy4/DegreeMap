@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import AddCourseButton from "./AddCourseButton";
-import AddCourseModal from "./AddCourseModal";
+import AddCourseButton from "./ui/AddCourseButton";
+import AddCourseModal from "./ui/AddCourseModal";
 import { Course } from "@/types/Course";
 
 interface CourseBankProps {
