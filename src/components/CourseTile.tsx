@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 import { Course} from "../types/Course";
-import EditCourseModal from "./ui/EditCourseModal";
+import { useCourseStore } from "@/store/courseStore";
 import EditCourseButton from "./ui/EditCourseButton";
+import EditCourseModal from "./ui/EditCourseModal";
 import BackToBankButton from "./ui/BackToBankButton";
 import DeleteCourseButton from "./ui/DeleteCourseButton";
 
 interface CourseTileProps {
   course: Course;
-  onEditCourse: (course: Course) => void;
-  onDeleteCourse: (courseId: string) => void;
 }
 
-export default function CourseTile({ course, onEditCourse, onDeleteCourse }: CourseTileProps) {
+export default function CourseTile({ course }: CourseTileProps) {
   const [ isEditModalOpen, setIsEditModalOpen ] = useState(false);
+
+  const editCourse = useCourseStore((state) => state.editCourse);
+  const deleteCourse = useCourseStore((state) => state.deleteCourse);
 
   return (
     <div className="rounded-lg flex flex-row border border-gray-300 my-4 text-gray-800 text-center">
@@ -27,8 +29,8 @@ export default function CourseTile({ course, onEditCourse, onDeleteCourse }: Cou
         </div>
         <div className="flex flex-row py-2 gap-2 text-left">
           <EditCourseButton onClick={() => setIsEditModalOpen(true)} />
-          <BackToBankButton course={course} onClick={onEditCourse} />
-          <DeleteCourseButton onClick={() => onDeleteCourse(course.id)} />
+          <BackToBankButton course={course} onClick={editCourse} />
+          <DeleteCourseButton onClick={() => deleteCourse(course.id)} />
         </div>
       </div>
 
@@ -36,7 +38,7 @@ export default function CourseTile({ course, onEditCourse, onDeleteCourse }: Cou
         key={course?.id} // question mark for if course is null/undefined
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
-        onSave={onEditCourse}
+        onSave={editCourse}
         course={course}
       />
 

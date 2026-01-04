@@ -1,28 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import { Course } from "@/types/Course";
+import { useCourseStore } from "@/store/courseStore";
 import AddCourseButton from "./ui/AddCourseButton";
 import AddCourseModal from "./ui/AddCourseModal";
-import { Course } from "@/types/Course";
 import EditCourseButton from "./ui/EditCourseButton";
 import EditCourseModal from "./ui/EditCourseModal";
-import BackToBankButton from "./ui/BackToBankButton";
 import DeleteCourseButton from "./ui/DeleteCourseButton";
 
-interface CourseBankProps {
-  courses: Course[];
-  onAddCourse: (course: Course) => void;
-  onEditCourse: (course: Course) => void;
-  onDeleteCourse: (courseId: string) => void;
-}
-
-export default function CourseBank({ courses, onAddCourse, onEditCourse, onDeleteCourse }: CourseBankProps) {
+export default function CourseBank() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingCourse, setEditingCourse] = useState<Course | null>(null); // one state - course = being edited; null = closed
 
-  // one state - course = being edited; null = closed
-  const [editingCourse, setEditingCourse] = useState<Course | null>(null);
+  const courses = useCourseStore((state) => state.courses);
+  const addCourse = useCourseStore((state) => state.addCourse);
+  const editCourse = useCourseStore((state) => state.editCourse);
+  const deleteCourse = useCourseStore((state) => state.deleteCourse);
 
   const bankCourses = courses.filter(c => c.location === 'Bank');
+
+  console.log("Rendering courses array:", courses);
 
   return (
     <div className="bg-white rounded-lg shadow p-6 mb-8"> {/* Course Bank Container */}
@@ -49,7 +47,7 @@ export default function CourseBank({ courses, onAddCourse, onEditCourse, onDelet
               <td>
                 <div className="flex items-center justify-center gap-2">
                   <EditCourseButton onClick={() => setEditingCourse(course)} />
-                  <DeleteCourseButton onClick={() => onDeleteCourse(course.id)} />
+                  <DeleteCourseButton onClick={() => deleteCourse(course.id)} />
                 </div>
               </td>
             </tr>
@@ -66,7 +64,7 @@ export default function CourseBank({ courses, onAddCourse, onEditCourse, onDelet
       <AddCourseModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSave={onAddCourse}
+        onSave={addCourse}
         location="Bank"
       />
 
@@ -75,7 +73,7 @@ export default function CourseBank({ courses, onAddCourse, onEditCourse, onDelet
           key={editingCourse.id}
           isOpen={true} // always true when rendered (because of {editingCourse && ...})
           onClose={() => setEditingCourse(null)}
-          onSave={onEditCourse} // onSave in EditCourseModal also calls onClose(), so don't need to call it here
+          onSave={editCourse} // onSave in EditCourseModal also calls onClose(), so don't need to call it here
           course={editingCourse}
         />
       }

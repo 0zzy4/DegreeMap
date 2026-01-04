@@ -104,27 +104,27 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
               <option value="bank">Course Bank</option>
 
               <optgroup label="Year 1">
-                <option value="Year 1 - Fall">Fall</option>
-                <option value="Year 1 - Spring">Spring</option>
-                <option value="Year 1 - Summer">Summer</option>
+                <option value="Year1-Fall">Y1 Fall</option>
+                <option value="Year1-Spring">Y1 Spring</option>
+                <option value="Year1-Summer">Y1 Summer</option>
               </optgroup>
 
               <optgroup label="Year 2">
-                <option value="Year 2 - Fall">Fall</option>
-                <option value="Year 2 - Spring">Spring</option>
-                <option value="Year 2 - Summer">Summer</option>
+                <option value="Year2-Fall">Y2 Fall</option>
+                <option value="Year2-Spring">Y2 Spring</option>
+                <option value="Year2-Summer">Y2 Summer</option>
               </optgroup>
 
               <optgroup label="Year 3">
-                <option value="Year 3 - Fall">Fall</option>
-                <option value="Year 3 - Spring">Spring</option>
-                <option value="Year 3 - Summer">Summer</option>
+                <option value="Year3-Fall">Y3 Fall</option>
+                <option value="Year3-Spring">Y3 Spring</option>
+                <option value="Year3-Summer">Y3 Summer</option>
               </optgroup>
 
               <optgroup label="Year 4">
-                <option value="Year 4 - Fall">Fall</option>
-                <option value="Year 4 - Spring">Spring</option>
-                <option value="Year 4 - Summer">Summer</option>
+                <option value="Year4-Fall">Y4 Fall</option>
+                <option value="Year4-Spring">Y4 Spring</option>
+                <option value="Year4-Summer">Y4 Summer</option>
               </optgroup>
             </select>
           </div>
