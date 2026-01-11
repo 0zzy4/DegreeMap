@@ -8,10 +8,10 @@ export default function SemesterGrid() {
       </div>
 
       <div className="flex flex-col">
-        <Year year="Year1" />
-        <Year year="Year2" />
-        <Year year="Year3" />
-        <Year year="Year4" />
+        <Year year="Year 1" />
+        <Year year="Year 2" />
+        <Year year="Year 3" />
+        <Year year="Year 4" />
       </div>
 
     </div>
