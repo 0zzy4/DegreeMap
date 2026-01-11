@@ -19,6 +19,7 @@ export default function CourseBank() {
   const deleteCourse = useCourseStore((state) => state.deleteCourse);
 
   const bankCourses = courses.filter(c => c.location === 'Bank');
+  const bankCredits = bankCourses.reduce((sum, c) => sum + c.credits, 0);
 
   console.log("Rendering courses array:", courses);
 
@@ -40,19 +41,39 @@ export default function CourseBank() {
         </thead>
         <tbody>
           {bankCourses.length > 0 && bankCourses.map((course) => (
-            <tr key={course.id} className="border-b border-gray-200 hover:bg-gray-50 text-center">
+            <tr key={course.id} className="border-b border-gray-300 hover:bg-gray-50 text-center">
               <td className="text-gray-800 py-3 px-4">{course.courseCode}</td>
               <td className="text-gray-800 py-3 px-4">{course.courseName}</td>
               <td className="text-gray-800 py-3 px-4">{course.credits}</td>
               <td>
                 <div className="flex items-center justify-center gap-2">
                   <EditCourseButton onClick={() => setEditingCourse(course)} />
-                  <DeleteCourseButton onClick={() => deleteCourse(course.id)} />
+                  <DeleteCourseButton text="D" onClick={() => deleteCourse(course.id)} />
                 </div>
               </td>
             </tr>
           ))}
+
+
         </tbody>
+        <tfoot>
+          {bankCourses.length > 0 && (
+            <tr className=" border-t-2 border-gray-500">
+              <td colSpan={1}></td>
+              <td colSpan={1}>
+                <div className="flex justify-center">
+                  <DeleteCourseButton text="Delete All" onClick={() => {
+                    bankCourses.forEach(course => deleteCourse(course.id));
+                  }} />
+                </div>
+              </td>
+              <td colSpan={1}>
+                <p className="text-center py-3 font-semibold text-gray-700">Total: {bankCredits} credits</p>
+              </td>
+              <td colSpan={1}></td>
+            </tr>
+          )}
+        </tfoot>
       </table>
 
       {bankCourses.length === 0 && (
