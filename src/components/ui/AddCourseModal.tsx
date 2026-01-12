@@ -3,6 +3,7 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { Course } from "@/types/Course";
+import { X } from "lucide-react";
 
 interface AddCourseModalProps {
   isOpen: boolean;
@@ -46,7 +47,7 @@ export default function AddCourseModal({ isOpen, onClose, onSave, location}: Add
 
         <div className="flex justify-between">
           <h2 className="text-gray-800 text-xl font-semibold mb-4">Add Course</h2>
-          <button className="border text-gray-800 rounded px-4 py-2 hover:bg-gray-200" onClick={onClose}>X</button>
+          <button className="border text-gray-800 rounded px-2 py-2 hover:bg-gray-200" onClick={onClose}><X /></button>
         </div>
 
         <form onSubmit={handleSave} className="flex flex-col mb-2">

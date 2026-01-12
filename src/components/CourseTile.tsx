@@ -30,7 +30,7 @@ export default function CourseTile({ course }: CourseTileProps) {
         <div className="flex flex-row py-2 gap-2 text-left">
           <EditCourseButton onClick={() => setIsEditModalOpen(true)} />
           <BackToBankButton course={course} onClick={editCourse} />
-          <DeleteCourseButton text="D" onClick={() => deleteCourse(course.id)} />
+          <DeleteCourseButton text="" onClick={() => deleteCourse(course.id)} />
         </div>
       </div>
 

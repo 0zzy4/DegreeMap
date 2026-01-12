@@ -1,4 +1,5 @@
 import { Course } from "@/types/Course";
+import { ArrowBigLeftDash } from "lucide-react";
 
 interface BackToBankButtonProps {
   course: Course;
@@ -17,6 +18,8 @@ export default function BackToBankButton({ course, onClick }: BackToBankButtonPr
   return (
     <button
       onClick={backToBank}
-      className="bg-violet-400 text-white rounded text-sm px-2 h-6 hover:bg-violet-500">B</button>
+      className="bg-violet-400 text-white rounded text-sm px-1 h-6 hover:bg-violet-500">
+      <ArrowBigLeftDash size={16} />
+    </button>
   );
 }
