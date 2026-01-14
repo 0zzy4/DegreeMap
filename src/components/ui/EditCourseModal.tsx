@@ -127,6 +127,12 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
                 <option value="Year 4-Spring">Y4 Spring</option>
                 <option value="Year 4-Summer">Y4 Summer</option>
               </optgroup>
+
+              <optgroup label="Year 5">
+                <option value="Year 5-Fall">Y5 Fall</option>
+                <option value="Year 5-Spring">Y5 Spring</option>
+                <option value="Year 5-Summer">Y5 Summer</option>
+              </optgroup>
             </select>
           </div>
 

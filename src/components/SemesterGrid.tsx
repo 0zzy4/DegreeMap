@@ -22,6 +22,7 @@ export default function SemesterGrid() {
         <Year year="Year 2" />
         <Year year="Year 3" />
         <Year year="Year 4" />
+        <Year year="Year 5" />
       </div>
 
     </div>
