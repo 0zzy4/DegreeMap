@@ -102,7 +102,7 @@ export default function EditCourseModal({ isOpen, onClose, onSave, course}: Edit
               onChange={(e) => setDraftLocation(e.target.value)}
               className="text-gray-600 border border-gray-800 rounded px-4 py-2"
             >
-              <option value="bank">Course Bank</option>
+              <option value="Bank">Course Bank</option>
 
               <optgroup label="Year 1">
                 <option value="Year 1-Fall">Y1 Fall</option>
